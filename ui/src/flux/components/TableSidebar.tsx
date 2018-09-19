@@ -8,8 +8,8 @@ import TableSidebarItem from 'src/flux/components/TableSidebarItem'
 
 interface Props {
   data: FluxTable[]
-  selectedResultID: string
-  onSelectResult: (id: string) => void
+  selectedResultID: number
+  onSelectResult: (index: number) => void
 }
 
 interface State {

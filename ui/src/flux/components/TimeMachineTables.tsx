@@ -1,6 +1,7 @@
 // Libraries
 import React, {PureComponent} from 'react'
 import memoizeOne from 'memoize-one'
+import _ from 'lodash'
 
 // Components
 import TableSidebar from 'src/flux/components/TableSidebar'
@@ -126,7 +127,12 @@ class TimeMachineTables extends PureComponent<Props, State> {
     return fieldOptions
   }
 
-  private handleSelectResult = (selectedResultID: string): void => {
+  private handleSelectResult = (index: number): void => {
+    const {data} = this.props
+
+    const table = _.find(data, (__, i) => i === index)
+    const selectedResultID = table.id
+
     this.setState({selectedResultID})
   }
 
@@ -142,7 +148,7 @@ class TimeMachineTables extends PureComponent<Props, State> {
     return !!this.props.data && !!this.selectedResult
   }
 
-  private get defaultResultId() {
+  private get defaultResultId(): number {
     const {data} = this.props
 
     if (data.length && !!data[0]) {
